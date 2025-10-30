@@ -78,6 +78,27 @@
             color: #ccc;
             margin-left: 20px;
         }
+
+        /* Mobile responsive styles */
+        @media (max-width: 768px) {
+            .nav-header {
+                padding: 8px 10px;
+            }
+
+            button {
+                padding: 6px 12px;
+                font-size: 14px;
+            }
+
+            .page-indicator {
+                font-size: 14px;
+                padding: 0 5px;
+            }
+
+            .keyboard-hint {
+                display: none;
+            }
+        }
     </style>
 </head>
 <body>
@@ -127,6 +148,36 @@
                 nextPage();
             }
         });
+
+        // Touch/Swipe navigation
+        let touchStartX = 0;
+        let touchEndX = 0;
+        const minSwipeDistance = 50;
+
+        const iframe = document.getElementById('contentFrame');
+
+        document.addEventListener('touchstart', function(event) {
+            touchStartX = event.changedTouches[0].screenX;
+        }, { passive: true });
+
+        document.addEventListener('touchend', function(event) {
+            touchEndX = event.changedTouches[0].screenX;
+            handleSwipe();
+        }, { passive: true });
+
+        function handleSwipe() {
+            const swipeDistance = touchEndX - touchStartX;
+
+            if (Math.abs(swipeDistance) > minSwipeDistance) {
+                if (swipeDistance > 0) {
+                    // Swipe right - go to previous page
+                    previousPage();
+                } else {
+                    // Swipe left - go to next page
+                    nextPage();
+                }
+            }
+        }
 
         // Initialize
         updatePage();
