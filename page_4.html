@@ -18,20 +18,14 @@
           font-family: 'Roboto', sans-serif;
           margin: 0;
           padding: 0;
+          overflow: hidden;
       }
 
       .slide {
           height: 100%;
           position: relative;
+          background: linear-gradient(to right, #F0F0F0, #ffffff);
       }
-   body { overflow: hidden; margin: 0;
-            padding: 0;}
-        .slide {
-
-
-            position: relative;
-            background: linear-gradient(to right, #F0F0F0, #ffffff);
-        }
         .chart-container {
             background-color: white;
             border-radius: 8px;
@@ -60,10 +54,39 @@
         .stat-card:hover {
             transform: translateY(-5px);
         }
-    
-html {
-    overflow: hidden;
-}
+
+        /* Mobile responsive styles */
+        @media (max-width: 768px) {
+            .grid-cols-2 {
+                grid-template-columns: repeat(1, minmax(0, 1fr)) !important;
+            }
+            .gap-6 {
+                gap: 1rem !important;
+            }
+            .p-6 {
+                padding: 1rem !important;
+            }
+            .text-3xl {
+                font-size: 1.5rem !important;
+            }
+            .text-2xl {
+                font-size: 1.3rem !important;
+            }
+            .text-xl {
+                font-size: 1.1rem !important;
+            }
+            header {
+                flex-wrap: wrap;
+                padding: 1rem !important;
+            }
+            footer {
+                position: relative !important;
+                padding: 0.5rem 1rem !important;
+            }
+            .chart-container {
+                overflow-x: auto;
+            }
+        }
   </style>
  </head>
  <body>

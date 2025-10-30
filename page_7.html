@@ -16,20 +16,14 @@
           font-family: 'Roboto', sans-serif;
           margin: 0;
           padding: 0;
+          overflow: hidden;
       }
 
       .slide {
           height: 100%;
           position: relative;
+          background: linear-gradient(to right, #F0F0F0, #ffffff);
       }
-   body { overflow: hidden; margin: 0;
-            padding: 0;}
-        .slide {
-
-
-            position: relative;
-            background: linear-gradient(to right, #F0F0F0, #ffffff);
-        }
         .skill-card {
             transition: all 0.3s ease;
             border-left: 4px solid transparent;
@@ -61,10 +55,43 @@
             background: #FF6B35;
             border-radius: 50%;
         }
-    
-html {
-    overflow: hidden;
-}
+
+        /* Mobile responsive styles */
+        @media (max-width: 768px) {
+            .flex {
+                flex-direction: column !important;
+            }
+            .w-1\/2 {
+                width: 100% !important;
+            }
+            .pr-6, .pl-6 {
+                padding-left: 0 !important;
+                padding-right: 0 !important;
+            }
+            .p-8 {
+                padding: 1rem !important;
+            }
+            .p-6, .p-4 {
+                padding: 1rem !important;
+            }
+            .text-3xl {
+                font-size: 1.5rem !important;
+            }
+            .text-2xl {
+                font-size: 1.3rem !important;
+            }
+            .text-xl {
+                font-size: 1.1rem !important;
+            }
+            header {
+                flex-wrap: wrap;
+                padding: 1rem !important;
+            }
+            footer {
+                position: relative !important;
+                padding: 0.5rem 1rem !important;
+            }
+        }
   </style>
  </head>
  <body>
@@ -72,7 +99,7 @@ html {
    <!-- Header -->
    <header class="bg-gray-800 text-white py-4 px-8 flex justify-between items-center">
     <div class="flex items-center">
-     <img alt="Inventorium London Logo" class="h-10 w-10 mr-4" src="/workspace/uploaded_files/logo-16fb766d-a48d-41cf-8b75-2b8bd0ef7dda.jpg"/>
+        <img alt="Inventorium London Logo" class="h-10 w-10 mr-4" src="https://images.squarespace-cdn.com/content/69038aae6c76cc4d3dc8c869/e23840bc-420b-4247-a828-f0763596c855/2025-10-30+09.38.13.jpg?content-type=image%2Fjpeg"/>
      <h1 class="text-3xl font-bold">
       Learning Outcomes &amp; Unique Value
      </h1>
