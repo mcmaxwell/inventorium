@@ -1,0 +1,298 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Market Data &amp; Opportunity
+  </title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+  <script src="https://d3js.org/d3.v7.min.js">
+  </script>
+  <script src="https://cdn.tailwindcss.com">
+  </script>
+  <style>
+   body {width: 1280px; min-height: 720px; overflow: hidden; margin: 0;
+            padding: 0;}
+        .slide {
+            width: 1280px;
+            min-height: 720px;
+            position: relative;
+            background: linear-gradient(to right, #F0F0F0, #ffffff);
+        }
+        .chart-container {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .bar {
+            fill: #00A896;
+            transition: fill 0.3s;
+        }
+        .bar:hover {
+            fill: #FF6B35;
+        }
+        .axis text {
+            font-size: 12px;
+            font-family: Roboto, sans-serif;
+        }
+        .axis path, .axis line {
+            stroke: #4A4E69;
+        }
+        .stat-card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+    
+html {
+    overflow: hidden;
+}
+  </style>
+ </head>
+ <body>
+  <div class="slide bg-gray-50" style=" overflow: hidden;">
+   <!-- Header -->
+   <header class="bg-gray-800 text-white py-4 px-8 flex justify-between items-center">
+    <div class="flex items-center">
+     <img alt="Inventorium London Logo" class="h-10 w-10 mr-4" src="/workspace/uploaded_files/logo-16fb766d-a48d-41cf-8b75-2b8bd0ef7dda.jpg"/>
+     <h1 class="text-3xl font-bold">
+      Market Data &amp; Opportunity
+     </h1>
+    </div>
+   </header>
+   <!-- Main Content -->
+   <main class="p-6">
+    <div class="grid grid-cols-2 gap-6">
+     <!-- Left Column - Education Gap -->
+     <div class="flex flex-col space-y-4">
+      <div class="stat-card p-4">
+       <h3 class="text-xl font-bold text-gray-800 mb-2">
+        <i class="fas fa-chart-line mr-2 text-orange-500">
+        </i>
+        Education Gap
+       </h3>
+       <ul class="text-gray-700 space-y-2">
+        <li class="flex items-start">
+         <i class="fas fa-check-circle text-teal-500 mt-1 mr-2">
+         </i>
+         <span>
+          Ontario&#39;s EQAO (2023-24) shows mixed literacy gains and stagnant math scores
+         </span>
+        </li>
+        <li class="flex items-start">
+         <i class="fas fa-check-circle text-teal-500 mt-1 mr-2">
+         </i>
+         <span>
+          PISA 2022 data indicates Canadian students remain below baseline proficiency
+         </span>
+        </li>
+       </ul>
+      </div>
+      <div class="chart-container p-4 h-48">
+       <h3 class="text-lg font-bold text-gray-800 mb-2">
+        Student Proficiency Gap
+       </h3>
+       <div class="w-full h-32" id="proficiency-chart">
+       </div>
+      </div>
+     </div>
+     <!-- Right Column - Growing Demand -->
+     <div class="flex flex-col space-y-4">
+      <div class="stat-card p-4">
+       <h3 class="text-xl font-bold text-gray-800 mb-2">
+        <i class="fas fa-rocket mr-2 text-orange-500">
+        </i>
+        Growing Demand
+       </h3>
+       <ul class="text-gray-700 space-y-2">
+        <li class="flex items-start">
+         <i class="fas fa-check-circle text-teal-500 mt-1 mr-2">
+         </i>
+         <span>
+          OUAC program groups (2023-2025) show sustained interest in Engineering &amp; Computer Science
+         </span>
+        </li>
+        <li class="flex items-start">
+         <i class="fas fa-check-circle text-teal-500 mt-1 mr-2">
+         </i>
+         <span>
+          Statistics Canada (2022/23) confirms growth in Math/Computer enrollments
+         </span>
+        </li>
+       </ul>
+      </div>
+      <div class="chart-container p-4 h-48">
+       <h3 class="text-lg font-bold text-gray-800 mb-2">
+        STEM Enrollment Growth
+       </h3>
+       <div class="w-full h-32" id="enrollment-chart">
+       </div>
+      </div>
+     </div>
+    </div>
+    <!-- Bottom Section - Market Opportunity -->
+    <div class="mt-6 bg-white p-4 rounded-lg shadow">
+     <h3 class="text-xl font-bold text-gray-800 mb-2">
+      <i class="fas fa-lightbulb mr-2 text-orange-500">
+      </i>
+      Market Opportunity
+     </h3>
+     <p class="text-gray-700">
+      The data clearly indicates a need for early intervention to build foundational logic and problem-solving skills, 
+                    while also showing growing interest in STEM fields. Inventorium London addresses this gap with hands-on, 
+                    practical STEM education that develops both technical skills and project delivery discipline.
+     </p>
+    </div>
+   </main>
+   <!-- Footer -->
+   <footer class="absolute bottom-0 w-full bg-gray-800 text-white py-2 px-8 flex justify-between items-center">
+    <div class="text-sm">
+     Inventorium London
+    </div>
+    <div class="text-sm">
+     Page 4 of 10
+    </div>
+   </footer>
+  </div>
+  <script>
+   // D3.js Charts
+        document.addEventListener('DOMContentLoaded', function() {
+            // Proficiency Gap Chart (Simplified representation)
+            const proficiencyData = [
+                {subject: "Literacy", gap: 30},
+                {subject: "Math", gap: 40}
+            ];
+            
+            const proficiencyChart = d3.select("#proficiency-chart");
+            const proficiencyWidth = proficiencyChart.node().getBoundingClientRect().width;
+            const proficiencyHeight = proficiencyChart.node().getBoundingClientRect().height;
+            
+            const proficiencySvg = proficiencyChart.append("svg")
+                .attr("width", proficiencyWidth)
+                .attr("height", proficiencyHeight);
+                
+            const proficiencyX = d3.scaleBand()
+                .domain(proficiencyData.map(d => d.subject))
+                .range([40, proficiencyWidth - 40])
+                .padding(0.3);
+                
+            const proficiencyY = d3.scaleLinear()
+                .domain([0, 50])
+                .range([proficiencyHeight - 30, 20]);
+                
+            // X-axis
+            proficiencySvg.append("g")
+                .attr("class", "axis")
+                .attr("transform", `translate(0, ${proficiencyHeight - 30})`)
+                .call(d3.axisBottom(proficiencyX));
+                
+            // Y-axis
+            proficiencySvg.append("g")
+                .attr("class", "axis")
+                .attr("transform", "translate(40, 0)")
+                .call(d3.axisLeft(proficiencyY).ticks(5).tickFormat(d => d + "%"));
+                
+            // Bars
+            proficiencySvg.selectAll(".bar")
+                .data(proficiencyData)
+                .enter()
+                .append("rect")
+                .attr("class", "bar")
+                .attr("x", d => proficiencyX(d.subject))
+                .attr("y", d => proficiencyY(d.gap))
+                .attr("width", proficiencyX.bandwidth())
+                .attr("height", d => proficiencyHeight - 30 - proficiencyY(d.gap))
+                .attr("fill", "#FF6B35");
+                
+            // Add labels
+            proficiencySvg.selectAll(".label")
+                .data(proficiencyData)
+                .enter()
+                .append("text")
+                .attr("class", "label")
+                .attr("x", d => proficiencyX(d.subject) + proficiencyX.bandwidth() / 2)
+                .attr("y", d => proficiencyY(d.gap) - 5)
+                .attr("text-anchor", "middle")
+                .text(d => d.gap + "%")
+                .attr("fill", "#4A4E69")
+                .attr("font-size", "12px");
+                
+            // Enrollment Growth Chart (Simplified representation)
+            const enrollmentData = [
+                {year: "2021", value: 65},
+                {year: "2022", value: 70},
+                {year: "2023", value: 75}
+            ];
+            
+            const enrollmentChart = d3.select("#enrollment-chart");
+            const enrollmentWidth = enrollmentChart.node().getBoundingClientRect().width;
+            const enrollmentHeight = enrollmentChart.node().getBoundingClientRect().height;
+            
+            const enrollmentSvg = enrollmentChart.append("svg")
+                .attr("width", enrollmentWidth)
+                .attr("height", enrollmentHeight);
+                
+            const enrollmentX = d3.scaleBand()
+                .domain(enrollmentData.map(d => d.year))
+                .range([40, enrollmentWidth - 40])
+                .padding(0.3);
+                
+            const enrollmentY = d3.scaleLinear()
+                .domain([60, 80])
+                .range([enrollmentHeight - 30, 20]);
+                
+            // X-axis
+            enrollmentSvg.append("g")
+                .attr("class", "axis")
+                .attr("transform", `translate(0, ${enrollmentHeight - 30})`)
+                .call(d3.axisBottom(enrollmentX));
+                
+            // Y-axis
+            enrollmentSvg.append("g")
+                .attr("class", "axis")
+                .attr("transform", "translate(40, 0)")
+                .call(d3.axisLeft(enrollmentY).ticks(4).tickFormat(d => d + "%"));
+                
+            // Line
+            const line = d3.line()
+                .x(d => enrollmentX(d.year) + enrollmentX.bandwidth() / 2)
+                .y(d => enrollmentY(d.value));
+                
+            enrollmentSvg.append("path")
+                .datum(enrollmentData)
+                .attr("fill", "none")
+                .attr("stroke", "#00A896")
+                .attr("stroke-width", 3)
+                .attr("d", line);
+                
+            // Points
+            enrollmentSvg.selectAll(".point")
+                .data(enrollmentData)
+                .enter()
+                .append("circle")
+                .attr("class", "point")
+                .attr("cx", d => enrollmentX(d.year) + enrollmentX.bandwidth() / 2)
+                .attr("cy", d => enrollmentY(d.value))
+                .attr("r", 5)
+                .attr("fill", "#00A896");
+                
+            // Add labels
+            enrollmentSvg.selectAll(".label")
+                .data(enrollmentData)
+                .enter()
+                .append("text")
+                .attr("class", "label")
+                .attr("x", d => enrollmentX(d.year) + enrollmentX.bandwidth() / 2)
+                .attr("y", d => enrollmentY(d.value) - 10)
+                .attr("text-anchor", "middle")
+                .text(d => d.value + "%")
+                .attr("fill", "#4A4E69")
+                .attr("font-size", "12px");
+        });
+  </script>
+ 
+
+</body></html>
